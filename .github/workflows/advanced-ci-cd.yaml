@@ -7,6 +7,12 @@ on:
     branches: [ main ]
   workflow_dispatch:
 
+# Permissions needed for GitHub Pages deployment
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
 env:
   JAVA_VERSION: '11'
   APP_NAME: 'calculator-app'
