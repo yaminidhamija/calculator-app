@@ -51,7 +51,7 @@ jobs:
         run: |
           mvn package -DskipTests
           # Rename with version
-          mv target/calculator-app-1.0-SNAPSHOT.jar target/calculator-app-${{ steps.version.outputs.version }}.jar
+          mv target/simple-calculator-app-1.0-SNAPSHOT.jar target/calculator-app-${{ steps.version.outputs.version }}.jar
 
       - name: 📋 Set artifact name
         id: artifact
