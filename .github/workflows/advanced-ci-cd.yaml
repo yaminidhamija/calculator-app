@@ -170,6 +170,9 @@ jobs:
         run: |
           mkdir -p docs
           
+          # Create .nojekyll to disable Jekyll processing
+          touch docs/.nojekyll
+          
           # Copy JaCoCo coverage report if it exists
           if [ -d test-reports/target/site/jacoco ]; then
             mkdir -p docs/coverage
@@ -178,7 +181,7 @@ jobs:
           fi
           
           # Create index.html
-          cat > docs/index.html << 'EOF'
+          cat > docs/index.html << EOF
           <!DOCTYPE html>
           <html lang="en">
           <head>
@@ -427,6 +430,17 @@ jobs:
           fi
           
           echo "✅ Documentation generated"
+
+      - name: 🔍 Verify documentation contents
+        run: |
+          echo "📋 Contents of docs directory:"
+          ls -la docs/
+          echo ""
+          echo "📄 Checking index.html size:"
+          du -h docs/index.html
+          echo ""
+          echo "🔍 First few lines of index.html:"
+          head -20 docs/index.html
 
       - name: 📤 Upload documentation artifact
         uses: actions/upload-artifact@v4
