@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator App - Build 1.0.6</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        .header h1 { font-size: 2.5em; margin-bottom: 10px; }
+        .header p { font-size: 1.2em; opacity: 0.9; }
+        .content { padding: 40px; }
+        .section {
+            margin-bottom: 30px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+        }
+        .section h2 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+        .badge {
+            display: inline-block;
+            padding: 5px 15px;
+            background: #10b981;
+            color: white;
+            border-radius: 20px;
+            font-size: 0.9em;
+            margin: 5px;
+        }
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .stat {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .stat-value {
+            font-size: 2em;
+            font-weight: bold;
+            color: #667eea;
+        }
+        .stat-label {
+            color: #6b7280;
+            margin-top: 5px;
+        }
+        .download-btn {
+            display: inline-block;
+            padding: 15px 30px;
+            background: #667eea;
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: bold;
+            transition: transform 0.2s;
+        }
+        .download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        code {
+            background: #1f2937;
+            color: #10b981;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+        }
+        .endpoint {
+            background: white;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+            border-left: 3px solid #10b981;
+        }
+        .method {
+            display: inline-block;
+            padding: 3px 10px;
+            background: #10b981;
+            color: white;
+            border-radius: 4px;
+            font-size: 0.85em;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🧮 Calculator App</h1>
+            <p>Version 1.0.6</p>
+            <p>Built with GitHub Actions CI/CD</p>
+        </div>
+
+        <div class="content">
+            <div class="section">
+                <h2>📊 Build Information</h2>
+                <div class="stats">
+                    <div class="stat">
+                        <div class="stat-value">1.0.6</div>
+                        <div class="stat-label">Version</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value">✅</div>
+                        <div class="stat-label">Build Status</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value">Java 11</div>
+                        <div class="stat-label">Runtime</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>📦 Download</h2>
+                <p style="margin-bottom: 15px;">Download the executable JAR file:</p>
+                <a href="calculator-app-1.0.6.jar" class="download-btn">
+                    ⬇️ Download calculator-app-1.0.6.jar
+                </a>
+            </div>
+
+            <div class="section">
+                <h2>🚀 Quick Start</h2>
+                <p style="margin-bottom: 15px;">Run the application:</p>
+                <code>java -jar calculator-app-1.0.6.jar</code>
+
+                <p style="margin-top: 20px; margin-bottom: 10px;">The application will output calculations directly:</p>
+                <div class="endpoint">
+                    <strong>Sample Output:</strong><br>
+                    5 + 3 = 8<br>
+                    10 - 4 = 6<br>
+                    6 * 7 = 42<br>
+                    15 / 3 = 5.0<br>
+                    Is 8 even? true
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>✨ Features</h2>
+                <span class="badge">➕ Addition</span>
+                <span class="badge">➖ Subtraction</span>
+                <span class="badge">✖️ Multiplication</span>
+                <span class="badge">➗ Division</span>
+                <span class="badge">🔢 Even/Odd Check</span>
+                <span class="badge">🧪 Unit Tested</span>
+                <span class="badge">🔒 Security Scanned</span>
+            </div>
+
+            <div class="section">
+                <h2>🔧 CI/CD Pipeline</h2>
+                <p>This application was built using a professional CI/CD pipeline:</p>
+                <ul style="margin-top: 15px; margin-left: 20px; line-height: 1.8;">
+                    <li>✅ Automated builds on every commit</li>
+                    <li>✅ Comprehensive unit testing</li>
+                    <li>✅ Security vulnerability scanning</li>
+                    <li>✅ Artifact management and versioning</li>
+                    <li>✅ Automated documentation generation</li>
+                    <li>✅ Deployment to GitHub Pages</li>
+                </ul>
+            </div>
+
+            <div class="section">
+                <h2>📝 API Documentation</h2>
+                <p style="margin-bottom: 15px;">Calculator Operations:</p>
+
+                <div class="endpoint">
+                    <span class="method">METHOD</span>
+                    <strong>add(int a, int b)</strong><br>
+                    <small>Returns the sum of two integers</small>
+                </div>
+
+                <div class="endpoint">
+                    <span class="method">METHOD</span>
+                    <strong>subtract(int a, int b)</strong><br>
+                    <small>Returns the difference between two integers</small>
+                </div>
+
+                <div class="endpoint">
+                    <span class="method">METHOD</span>
+                    <strong>multiply(int a, int b)</strong><br>
+                    <small>Returns the product of two integers</small>
+                </div>
+
+                <div class="endpoint">
+                    <span class="method">METHOD</span>
+                    <strong>divide(int a, int b)</strong><br>
+                    <small>Returns the quotient (throws exception if b=0)</small>
+                </div>
+
+                <div class="endpoint">
+                    <span class="method">METHOD</span>
+                    <strong>isEven(int number)</strong><br>
+                    <small>Returns true if number is even, false otherwise</small>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>🔗 Links</h2>
+                <p><strong>Repository:</strong> <a href="https://github.com/yaminidhamija/calculator-app">View on GitHub</a></p>
+                <p><strong>Build Run:</strong> <a href="https://github.com/yaminidhamija/calculator-app/actions/runs/20238465364">View Workflow</a></p>
+                <p><strong>Coverage Report:</strong> <a href="coverage/">View JaCoCo Coverage Report</a></p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
