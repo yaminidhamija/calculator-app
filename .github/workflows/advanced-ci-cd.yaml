@@ -95,20 +95,22 @@ jobs:
       - name: 🧪 Run unit tests
         run: mvn test
 
-      - name: 📊 Generate test report
+      - name: 📊 Generate JaCoCo coverage report
         if: always()
-        uses: dorny/test-reporter@v1
-        with:
-          name: JUnit Test Results
-          path: target/surefire-reports/*.xml
-          reporter: java-junit
+        run: |
+          echo "📊 JaCoCo Coverage Report Generated"
+          if [ -f target/site/jacoco/index.html ]; then
+            echo "✅ Coverage report available at target/site/jacoco/index.html"
+          fi
 
       - name: 📤 Upload test results
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: test-results
-          path: target/surefire-reports/
+          path: |
+            target/surefire-reports/
+            target/site/jacoco/
           retention-days: 7
 
   # ============================================
@@ -160,6 +162,13 @@ jobs:
       - name: 📚 Generate documentation site
         run: |
           mkdir -p docs
+          
+          # Copy JaCoCo coverage report if it exists
+          if [ -d test-reports/target/site/jacoco ]; then
+            mkdir -p docs/coverage
+            cp -r test-reports/target/site/jacoco/* docs/coverage/
+            echo "✅ Coverage report copied to docs/coverage/"
+          fi
           
           # Create index.html
           cat > docs/index.html << 'EOF'
@@ -391,7 +400,7 @@ jobs:
                           <h2>🔗 Links</h2>
                           <p><strong>Repository:</strong> <a href="${{ github.server_url }}/${{ github.repository }}">View on GitHub</a></p>
                           <p><strong>Build Run:</strong> <a href="${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}">View Workflow</a></p>
-                          <p><strong>Test Reports:</strong> <a href="test-reports/">View Test Results</a></p>
+                          <p><strong>Coverage Report:</strong> <a href="coverage/">View JaCoCo Coverage Report</a></p>
                       </div>
                   </div>
               </div>
@@ -402,8 +411,12 @@ jobs:
           # Copy JAR to docs directory
           cp calculator-app-${{ needs.build.outputs.version }}.jar docs/
           
-          # Copy test reports
-          cp -r test-reports docs/ 2>/dev/null || echo "No test reports to copy"
+          # Copy surefire test reports to docs
+          if [ -d test-reports/target/surefire-reports ]; then
+            mkdir -p docs/test-reports
+            cp -r test-reports/target/surefire-reports/* docs/test-reports/
+            echo "✅ Test reports copied to docs/test-reports/"
+          fi
           
           echo "✅ Documentation generated"
 
