@@ -142,7 +142,7 @@ jobs:
   build-docs:
     name: 📚 Build Documentation
     runs-on: ubuntu-latest
-    needs: [test, security]
+    needs: [build, test, security]
 
     steps:
       - name: 📥 Checkout code
@@ -152,6 +152,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: ${{ needs.build.outputs.artifact-name }}
+          path: ./artifacts
 
       - name: 📥 Download test results
         uses: actions/download-artifact@v4
@@ -409,7 +410,8 @@ jobs:
           EOF
           
           # Copy JAR to docs directory
-          cp calculator-app-${{ needs.build.outputs.version }}.jar docs/
+          cp artifacts/calculator-app-${{ needs.build.outputs.version }}.jar docs/
+          echo "✅ JAR copied to docs/"
           
           # Copy surefire test reports to docs
           if [ -d test-reports/target/surefire-reports ]; then
