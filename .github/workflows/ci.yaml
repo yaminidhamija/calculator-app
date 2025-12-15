@@ -59,6 +59,7 @@ jobs:
         # Step 7: Upload artifact
       - name: Upload JAR artifact
         uses: actions/upload-artifact@v4
+        if: github.ref == 'refs/heads/main'
         with:
           name: ${{ env.APP_NAME }}
           path: target/*.jar
@@ -66,6 +67,7 @@ jobs:
 
          # Step 8: Display success message
       - name: Success message
+        if: github.ref == 'refs/heads/main'
         run: |
             echo "🎉 Build completed successfully!"
             echo "📦 Artifact uploaded: ${{ env.APP_NAME }}"
